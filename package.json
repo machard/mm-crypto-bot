@@ -1,0 +1,75 @@
+{
+  "name": "",
+  "version": "1.0.0",
+  "description": "bot bitcoin",
+  "main": "index.js",
+  "dependencies": {
+    "async": "^2.0.0",
+    "aws-sdk": "^2.4.12",
+    "babel-cli": "^6.10.1",
+    "babel-plugin-transform-class-properties": "^6.10.2",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-stage-2": "^6.11.0",
+    "bitfinex-api-node": "^2.0.0-beta",
+    "blinktrade": "0.0.20",
+    "bluebird": "^3.5.1",
+    "byline": "^5.0.0",
+    "coinbase-exchange": "^0.2.1",
+    "cpu-stat": "^2.0.1",
+    "crypto-js": "^3.1.9-1",
+    "dateformat": "^1.0.12",
+    "debug": "^2.2.0",
+    "dotenv": "^4.0.0",
+    "duplexer": "^0.1.1",
+    "elasticsearch": "15.1.1",
+    "eventemitter3": "^1.2.0",
+    "fixjs": "github:machard/fixjs",
+    "google-auth-library": "^0.11.0",
+    "googleapis": "^22.2.0",
+    "highland": "^3.0.0-beta.2",
+    "immutable": "^3.8.1",
+    "limiter": "^1.1.2",
+    "lodash": "^4.13.1",
+    "minimist": "^1.2.0",
+    "mock-require": "^3.0.2",
+    "moment": "^2.20.1",
+    "node-fingerprint": "^1.1.0",
+    "node-ipc": "^9.1.1",
+    "nodemailer": "^4.6.7",
+    "num": "^0.3.0",
+    "poloLenderPro": "github:dutu/poloLender#d1db9a12cb574d5545c6e89c67bf6ab1b39101c0",
+    "regression": "^2.0.1",
+    "request": "^2.74.0",
+    "restify": "^4.1.1",
+    "uuid": "^2.0.2",
+    "ws": "^1.1.1"
+  },
+  "devDependencies": {
+    "babel-jest": "^14.1.0",
+    "babel-polyfill": "^6.13.0",
+    "browserify": "^16.2.2",
+    "chart.js": "^2.7.2",
+    "elasticdump": "^3.0.0",
+    "jest-cli": "^14.1.0"
+  },
+  "scripts": {
+    "test": "jest",
+    "start": "./node_modules/.bin/babel src --ignore visualizeLevels -d dist && node -r dotenv/config dist/index.js",
+    "backtest": "./node_modules/.bin/babel src -d dist && export BACKTESTING=true && export SAVE_TO_ES=true && export DEBUG=backtest* && node dist/index.js",
+    "setup-backtest": "docker run -d elasticsearch:1.5.2 -p 9200:9200 --name elasticsearch && docker run --name kibana --link elasticsearch:elasticsearch -p 5601:5601 -d kibana:4.0.3",
+    "deploy-kibana-locally": "./node_modules/.bin/elasticdump --input=kibana-exported.json --output=http://localhost:9200/.kibana --type=data",
+    "setup-es-locally": ". ./setup-local-es.sh",
+    "clean-backtest-result": "curl -XDELETE http://localhost:9200/logs*",
+    "remove-last-elastic-day": "node -r dotenv/config -r babel-register scripts/removeLastDay.js",
+    "visualizeLevels": "./node_modules/.bin/babel src/models/Book.js -o src/strategies/mm-levels/visualizeLevels/dist/Book.js && ./node_modules/.bin/babel src/strategies/lib/utils.js -o src/strategies/mm-levels/visualizeLevels/dist/utils.js && ./node_modules/.bin/babel src/strategies/mm-levels/level.calculs.js -o src/strategies/mm-levels/visualizeLevels/dist/level.calculs.js && ./node_modules/.bin/babel src/strategies/mm-levels/visualizeLevels/draw.js -o src/strategies/mm-levels/visualizeLevels/dist/draw.js && ./node_modules/.bin/browserify src/strategies/mm-levels/visualizeLevels/dist/draw.js -o src/strategies/mm-levels/visualizeLevels/dist/draw.browserify.js"
+  },
+  "babel": {
+    "presets": [
+      "es2015",
+      "stage-2"
+    ],
+    "plugins": [
+      "transform-class-properties"
+    ]
+  }
+}

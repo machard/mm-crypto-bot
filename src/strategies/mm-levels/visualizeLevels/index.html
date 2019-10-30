@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>Levels Viz</title>
+  <script src="./dist/draw.browserify.js"></script>
+  <style>
+  canvas {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+  }
+  </style>
+</head>
+
+<body>
+  <h1>Overall View</h1>
+  <div style="width:75%;">
+    <canvas id="canvas"></canvas>
+  </div>
+  <h2>Situation View</h2>
+  <div style="width:75%;">
+    <canvas id="canvas-situation"></canvas>
+  </div>
+  <button id="refreshBtn">Refresh</button>
+</body>
+
+</html>

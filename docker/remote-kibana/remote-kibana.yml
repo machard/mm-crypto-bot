@@ -1,0 +1,13 @@
+version: '2'
+services:
+  kibana-remote:
+    image: docker.elastic.co/kibana/kibana:6.3.1
+    container_name: kibana-remote
+    environment:
+      SERVER_NAME: kibana
+      ELASTICSEARCH_URL: http://atb-monitor.us-east-1.elasticbeanstalk.com:80
+      SERVER_PORT: 5602
+      XPACK_SECURITY_ENABLED: "false"
+      ELASTICSEARCH_REQUESTTIMEOUT: 120000
+    ports:
+      - 5602:5602
