@@ -42,7 +42,7 @@
     "request": "^2.74.0",
     "restify": "^4.1.1",
     "uuid": "^2.0.2",
-    "ws": "^1.1.1"
+    "ws": "^7.2.0"
   },
   "devDependencies": {
     "babel-jest": "^14.1.0",
