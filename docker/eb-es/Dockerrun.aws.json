@@ -1,0 +1,12 @@
+{
+  "AWSEBDockerrunVersion": "1",
+  "Image": {
+    "Name": "docker.elastic.co/elasticsearch/elasticsearch:6.3.1",
+    "Update": "true"
+  },
+  "Ports": [
+    {
+      "ContainerPort": "9200"
+    }
+  ]
+}
